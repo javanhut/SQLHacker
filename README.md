@@ -21,7 +21,13 @@ An interactive educational game that teaches database query skills through a cyb
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+# Git
+git clone https://github.com/javanhut/SQLHacker.git
+
+
+#Ivaldi
+ivaldi download javanhut/SQLHacker
+
 cd SQLGame
 
 # Install Bun (if not already installed)
