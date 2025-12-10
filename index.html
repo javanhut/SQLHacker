@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL_HACK3R - Database Infiltration Training</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="screen active">
+            <div class="glitch-container">
+                <h1 class="glitch" data-text="SQL_HACK3R">SQL_HACK3R</h1>
+            </div>
+            <p class="tagline">// DATABASE INFILTRATION TRAINING SYSTEM v2.0</p>
+            <div class="intro-text">
+                <p>> Welcome, recruit.</p>
+                <p>> You've been selected for advanced database operations training.</p>
+                <p>> Master SQL, PostgreSQL, and NoSQL to extract critical intelligence.</p>
+                <p>> Each mission requires both query execution AND code implementation.</p>
+                <p>> </p>
+                <p class="blink">> Press [ENTER] or click below to begin...</p>
+            </div>
+            <button id="start-btn" class="cyber-btn">[ INITIALIZE TRAINING ]</button>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- Header -->
+            <header id="game-header">
+                <div class="header-left">
+                    <span class="logo">SQL_HACK3R</span>
+                    <span class="level-indicator">LEVEL: <span id="current-level">1</span></span>
+                    <span class="db-type" id="db-type-indicator">SQL</span>
+                </div>
+                <div class="header-right">
+                    <span class="score">SCORE: <span id="score">0</span></span>
+                    <span class="timer">TIME: <span id="timer">--:--</span></span>
+                </div>
+            </header>
+
+            <!-- Mission Briefing -->
+            <div id="mission-panel">
+                <div class="mission-header">
+                    <span class="mission-icon">[!]</span>
+                    <span class="mission-title">MISSION BRIEFING</span>
+                    <button id="toggle-mission" class="mini-btn">[-]</button>
+                </div>
+                <div class="mission-content" id="mission-content">
+                    <p id="mission-text">Loading mission...</p>
+                    <div class="mission-hints" id="hints-container">
+                        <button id="hint-btn" class="cyber-btn small">REQUEST HINT (-50 pts)</button>
+                        <p id="hint-text" class="hidden"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div id="main-content">
+                <!-- Left Panel: Terminal/Query Area -->
+                <div id="left-panel">
+                    <div class="panel-tabs">
+                        <button class="tab-btn active" data-tab="terminal">TERMINAL</button>
+                        <button class="tab-btn" data-tab="schema">SCHEMA</button>
+                        <button class="tab-btn" data-tab="docs">DOCS</button>
+                    </div>
+
+                    <!-- Terminal Tab -->
+                    <div id="terminal-tab" class="tab-content active">
+                        <div id="terminal-output">
+                            <div class="terminal-line system">
+                                [SYSTEM] Connected to target database...
+                            </div>
+                            <div class="terminal-line system">
+                                [SYSTEM] Awaiting query input...
+                            </div>
+                        </div>
+                        <div id="terminal-input-area">
+                            <span class="prompt" id="db-prompt">SQL></span>
+                            <textarea id="query-input" placeholder="Enter your query here..." spellcheck="false"></textarea>
+                        </div>
+                        <div class="terminal-controls">
+                            <button id="run-query-btn" class="cyber-btn">EXECUTE [Ctrl+Enter]</button>
+                            <button id="clear-terminal-btn" class="cyber-btn secondary">CLEAR</button>
+                        </div>
+                    </div>
+
+                    <!-- Schema Tab -->
+                    <div id="schema-tab" class="tab-content">
+                        <div id="schema-content">
+                            <!-- Schema will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Docs Tab -->
+                    <div id="docs-tab" class="tab-content">
+                        <div id="docs-content">
+                            <!-- Documentation will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Code Implementation -->
+                <div id="right-panel">
+                    <div class="panel-header">
+                        <span>CODE IMPLEMENTATION</span>
+                        <div class="lang-selector">
+                            <button class="lang-btn active" data-lang="python">PYTHON</button>
+                            <button class="lang-btn" data-lang="go">GO</button>
+                        </div>
+                    </div>
+                    <div id="code-editor-container">
+                        <div id="code-template" class="code-section">
+                            <div class="code-header">Template:</div>
+                            <pre id="code-template-content"></pre>
+                        </div>
+                        <div class="code-section">
+                            <div class="code-header">Your Implementation:</div>
+                            <textarea id="code-input" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                    <div class="code-controls">
+                        <button id="validate-code-btn" class="cyber-btn">VALIDATE CODE</button>
+                        <button id="submit-mission-btn" class="cyber-btn success">SUBMIT MISSION</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div id="results-panel" class="hidden">
+                <div class="results-header">
+                    <span id="results-title">QUERY RESULTS</span>
+                    <button id="close-results" class="mini-btn">[X]</button>
+                </div>
+                <div id="results-content">
+                    <table id="results-table">
+                        <thead id="results-thead"></thead>
+                        <tbody id="results-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Complete Modal -->
+        <div id="level-complete-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 class="glitch" data-text="ACCESS GRANTED">ACCESS GRANTED</h2>
+                <div class="stats">
+                    <p>Query Accuracy: <span id="stat-query">100%</span></p>
+                    <p>Code Validation: <span id="stat-code">PASSED</span></p>
+                    <p>Time Bonus: <span id="stat-time">+100</span></p>
+                    <p>Level Score: <span id="stat-level-score">500</span></p>
+                </div>
+                <div class="intel-reveal">
+                    <p class="intel-label">EXTRACTED INTELLIGENCE:</p>
+                    <p id="intel-data" class="intel-data"></p>
+                </div>
+                <button id="next-level-btn" class="cyber-btn">PROCEED TO NEXT MISSION</button>
+            </div>
+        </div>
+
+        <!-- Game Complete Modal -->
+        <div id="game-complete-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 class="glitch" data-text="TRAINING COMPLETE">TRAINING COMPLETE</h2>
+                <p class="final-message">You have completed all training missions.</p>
+                <div class="final-stats">
+                    <p>Total Score: <span id="final-score">0</span></p>
+                    <p>Missions Completed: <span id="missions-completed">0</span></p>
+                    <p>Rank: <span id="final-rank">RECRUIT</span></p>
+                </div>
+                <button id="restart-btn" class="cyber-btn">RESTART TRAINING</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
